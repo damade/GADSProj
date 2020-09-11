@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">GADSProj</string>
+    <string name="img_content">Image</string>
+    <string name="name">John Doe</string>
+    <string name="time_remaining">223 learning hours, Kenya</string>
+    <string name="submission">Project Submission</string>
+
+    <!-- EDIT TEXT HINT -->
+    <string name="hint_first_name">First Name</string>
+    <string name="hint_last_name">Last Name</string>
+    <string name="hint_email_address">Email Address</string>
+    <string name="hint_project_link">Project on GITHUB (link)</string>
+
+    <!-- BUTTON TEXT -->
+    <string name="submit_button">Submit</string>
+
+    <!-- POP TEXT -->
+    <string name="sure">Are you sure ?</string>
+    <string name="yes">Yes</string>
+    <string name="successful">Submission Successful</string>
+    <string name="successful_not">Submission not Successful</string>
+
+    <!-- GENERAL TEXT -->
+    <string name="leader">LeaderBoard</string>
+    <string name="learning">Learning Leaders</string>
+    <string name="skill">Skill IQ Leaders</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- DYNAMIC TEXT -->
+    <string name="dynamic_hour"><b>%1$d learning hours, %2$s</b></string>
+
+
+</resources>
