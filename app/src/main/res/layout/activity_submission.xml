@@ -115,6 +115,7 @@
             android:autofillHints="@string/hint_email_address"/>
 
         <Button
+            android:id="@+id/goToQuestionPageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/submit_button"

@@ -37,7 +37,7 @@
                     android:textStyle="bold" />
 
                 <Button
-                    android:id="@+id/submit"
+                    android:id="@+id/goToSubmitPageButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"

@@ -38,18 +38,11 @@ class MainActivity : AppCompatActivity() {
         viewPager.setAdapter(viewPagerAdapter)
         viewPager.currentItem
 
-        tabLayout.setupWithViewPager(viewPager)
-
-
         //setSupportActionBar(toolbar)
 
-        TabLayoutMediator(tabLayout, viewPager, object : TabLayoutMediator.OnConfigureTabCallback {
-            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                // Styling each tab here
-                tab.text = "Tab $position"
-            }
-        }) {
-            tab, position -> tab.text =
+        TabLayoutMediator(tabLayout, viewPager) {
+            tab, position ->
+            viewPager.setCurrentItem(tab.position, true)
         }.attach()
 
 
