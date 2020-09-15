@@ -16,7 +16,9 @@
 
     <!-- POP TEXT -->
     <string name="sure">Are you sure ?</string>
+    <string name="empty_field_text">Kindly fill in all fields!!</string>
     <string name="yes">Yes</string>
+    <string name="empty_field_button">Fill In All Fields</string>
     <string name="successful">Submission Successful</string>
     <string name="successful_not">Submission not Successful</string>
 

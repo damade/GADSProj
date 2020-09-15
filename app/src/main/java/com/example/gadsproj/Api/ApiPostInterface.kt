@@ -13,5 +13,5 @@ interface ApiPostInterface {
         @Field("entry.1877115667") name: String?,
         @Field("entry.2006916086") lastName: String?,
         @Field("entry.284483984") linkToProject: String?
-    ): Call<Void?>?
+    ): Call<Void>
 }

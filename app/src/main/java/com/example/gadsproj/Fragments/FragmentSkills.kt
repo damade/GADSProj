@@ -1,17 +1,16 @@
 package com.example.gadsproj.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gadsproj.Adapters.SkilliqAdapter
 import com.example.gadsproj.Api.ApiClient
 import com.example.gadsproj.Api.ApiInterface
-import com.example.gadsproj.DataClass.SkillIq
 import com.example.gadsproj.DataClass.SkillIqResponse
 import com.example.gadsproj.R
 import retrofit2.Call
@@ -30,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentSkills : Fragment() {
 
-    var recyclerView: RecyclerView? = null
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -51,6 +50,8 @@ class FragmentSkills : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_skills, container, false)
 
+        var recyclerView: RecyclerView? = null
+
         // Inflate the layout for this fragment
         recyclerView = view.findViewById(R.id.skill_recycler_view)
 
@@ -67,7 +68,7 @@ class FragmentSkills : Fragment() {
                     recyclerView?.apply {
                         setHasFixedSize(true)
                         layoutManager = LinearLayoutManager(activity)
-                        adapter = SkilliqAdapter(response.body()!!.results)
+                        adapter = response.body()!!.results?.let { SkilliqAdapter(it) }
                     }
                 }
             }

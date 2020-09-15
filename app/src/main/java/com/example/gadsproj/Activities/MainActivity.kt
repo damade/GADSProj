@@ -1,7 +1,9 @@
 package com.example.gadsproj.Activities
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -9,10 +11,8 @@ import com.example.gadsproj.Adapters.GadsViewPagerAdapter
 import com.example.gadsproj.Fragments.FragmentLeaders
 import com.example.gadsproj.Fragments.FragmentSkills
 import com.example.gadsproj.R
-import com.google.android.material.tabs.TabItem
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var viewPager: ViewPager2 = findViewById(R.id.viewPager)
-        var tabLayout: TabLayout = findViewById(R.id.tabs)
-        var submit: Button = findViewById(R.id.submit)
-        var tabItemsLeaders: TabItem = findViewById(R.id.tabLeader)
-        var tabItemSkills: TabItem = findViewById(R.id.tabSkills)
+        val viewPager: ViewPager2 = findViewById(R.id.viewPager)
+        val tabLayout: TabLayout = findViewById(R.id.tabs)
+        val submit: Button = findViewById(R.id.goToSubmitPageButton)
+        /*var tabItemsLeaders: TabItem = findViewById(R.id.tabLeader)
+        var tabItemSkills: TabItem = findViewById(R.id.tabSkills)*/
 
-        tabLayout.setTabTextColors(ColorStateList.valueOf(getResources().getColor(R.color.colorWhite)))
+        tabLayout.tabTextColors = ColorStateList.valueOf(resources.getColor(R.color.colorWhite))
 
         val fragmentList = arrayListOf(
             FragmentLeaders.newInstance(),
@@ -35,16 +35,35 @@ class MainActivity : AppCompatActivity() {
         )
 
         val viewPagerAdapter = GadsViewPagerAdapter(this, fragmentList)
-        viewPager.setAdapter(viewPagerAdapter)
+        viewPager.adapter = viewPagerAdapter
         viewPager.currentItem
 
         //setSupportActionBar(toolbar)
 
-        TabLayoutMediator(tabLayout, viewPager) {
-            tab, position ->
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+
+            val tabTitles = arrayOf("Learning Leaders", "Skill IQ Leaders")
+            tab.text = tabTitles[position]
             viewPager.setCurrentItem(tab.position, true)
         }.attach()
 
+
+        val clickListener = View.OnClickListener { view ->
+
+            when (view.id) {
+                R.id.goToSubmitPageButton -> startSubmissionActivity()
+            }
+        }
+
+        submit.setOnClickListener(clickListener)
+    }
+
+    private fun startSubmissionActivity() {
+        val intent = Intent(this, SubmissionActivity::class.java)
+        // To pass any data to next activity
+        //intent.putExtra("keyIdentifier", value)
+        // start your next activity
+        startActivity(intent)
 
     }
 

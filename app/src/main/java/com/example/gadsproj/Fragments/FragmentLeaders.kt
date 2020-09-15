@@ -1,17 +1,17 @@
 package com.example.gadsproj.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gadsproj.Adapters.HourAdapter
 import com.example.gadsproj.Api.ApiClient
 import com.example.gadsproj.Api.ApiInterface
-import com.example.gadsproj.DataClass.HourResponse
+import com.example.gadsproj.DataClass.Hour
 import com.example.gadsproj.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class FragmentLeaders : Fragment() {
 
-    var recyclerView: RecyclerView? = null
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -50,24 +50,31 @@ class FragmentLeaders : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_leaders, container, false)
 
+        var recyclerView: RecyclerView? = null
+
         // Inflate the layout for this fragment
         recyclerView = view.findViewById(R.id.hour_recycler_view)
 
         val requestHour = ApiClient.buildService(ApiInterface::class.java)
         val callHour = requestHour.getHourLeaders()
 
-        callHour.enqueue(object : Callback<HourResponse> {
-            override fun onResponse(call: Call<HourResponse>, response: Response<HourResponse>) {
+        callHour.enqueue(object : Callback<List<Hour>> {
+            override fun onResponse(call: Call<List<Hour>>, response: Response<List<Hour>>) {
                 if (response.isSuccessful) {
-                    recyclerView?.apply {
+                    assert(response.body() != null)
+                    val hourList: List<Hour>? = response.body()
+                    /*recyclerView?.apply {
                         setHasFixedSize(true)
                         layoutManager = LinearLayoutManager(activity)
-                        adapter = HourAdapter(response.body()!!.results)
-                    }
+                        adapter = response.body()!!.results?.let { HourAdapter(it) }
+                    }*/
+                    recyclerView?.layoutManager = LinearLayoutManager(context)
+                    recyclerView.adapter = HourAdapter(hourList)
+
                 }
             }
 
-            override fun onFailure(call: Call<HourResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<Hour>>, t: Throwable) {
                 Toast.makeText(activity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
@@ -98,6 +105,3 @@ class FragmentLeaders : Fragment() {
     }
 }
 
-private fun <T> Call<T>.enqueue(any: Any) {
-
-}
